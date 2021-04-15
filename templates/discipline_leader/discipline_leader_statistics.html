@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+<title>统计信息</title>
+<link rel="icon" href="/static/favicon.ico" type="image/ico">
+<meta name="keywords" content="LightYear,光年,后台模板,毕业要求达成度管理系统,光年HTML模板">
+<meta name="description" content="LightYear是一个基于Bootstrap v3.3.7的毕业要求达成度管理系统的HTML模板。">
+<meta name="author" content="yinqi">
+<link href="/static/css/bootstrap.min.css" rel="stylesheet">
+<link href="/static/css/materialdesignicons.min.css" rel="stylesheet">
+<link href="/static/css/style.min.css" rel="stylesheet">
+</head>
+  
+<body>
+<div class="lyear-layout-web">
+  <div class="lyear-layout-container">
+    <!--左侧导航-->
+    <aside class="lyear-layout-sidebar">
+      
+      <!-- logo -->
+      <div id="logo" class="sidebar-header">
+        <a href="/discipline_leader/format"><img src="/static/images/nwu_login.png" width="220px" height="80px" /></a>
+      </div>
+      <div class="lyear-layout-sidebar-scroll"> 
+        
+        <nav class="sidebar-main">
+          <ul class="nav nav-drawer">
+            <li class="nav-item"> <a href="/discipline_leader/statistics"><i class="mdi mdi-home"></i> 统计信息</a> </li>
+            <li class="nav-item nav-item-has-subnav">
+              <a href="javascript:void(0)"><i class="mdi mdi-palette"></i> 培养方案</a>
+              <ul class="nav nav-subnav">
+                  <li> <a href="/discipline_leader/format">格式化培养方案</a> </li>
+                  <li> <a href="/discipline_leader/detail">毕业要求和指标点</a> </li>
+              </ul>
+            </li>
+          </ul>
+        </nav>
+
+      </div>
+      
+    </aside>
+    <!--End 左侧导航-->
+    
+    <!--头部信息-->
+    <header class="lyear-layout-header">
+      
+      <nav class="navbar navbar-default">
+        <div class="topbar">
+          
+          <div class="topbar-left">
+            <div class="lyear-aside-toggler">
+              <span class="lyear-toggler-bar"></span>
+              <span class="lyear-toggler-bar"></span>
+              <span class="lyear-toggler-bar"></span>
+            </div>
+            <span class="navbar-page-title"> 查看统计信息 </span>
+          </div>
+          
+          <ul class="topbar-right">
+            <li class="dropdown dropdown-profile">
+              <a href="javascript:void(0)" data-toggle="dropdown">
+                <img class="img-avatar img-avatar-48 m-r-10" src="/static/images/users/avatar.jpg" alt="头像" />
+                <span>{{current_user.user_id}} <span class="caret"></span></span>
+              </a>
+              <ul class="dropdown-menu dropdown-menu-right">
+                <li> <a href="/logout"><i class="mdi mdi-logout-variant"></i> 退出登录</a> </li>
+              </ul>
+            </li>
+            <!--切换主题配色-->
+		    <li class="dropdown dropdown-skin">
+			  <span data-toggle="dropdown" class="icon-palette"><i class="mdi mdi-palette"></i></span>
+			  <ul class="dropdown-menu dropdown-menu-right" data-stopPropagation="true">
+                <li class="drop-title"><p>主题</p></li>
+                <li class="drop-skin-li clearfix">
+                  <span class="inverse">
+                    <input type="radio" name="site_theme" value="default" id="site_theme_1" checked>
+                    <label for="site_theme_1"></label>
+                  </span>
+                  <span>
+                    <input type="radio" name="site_theme" value="dark" id="site_theme_2">
+                    <label for="site_theme_2"></label>
+                  </span>
+                  <span>
+                    <input type="radio" name="site_theme" value="translucent" id="site_theme_3">
+                    <label for="site_theme_3"></label>
+                  </span>
+                </li>
+			    <li class="drop-title"><p>LOGO</p></li>
+				<li class="drop-skin-li clearfix">
+                  <span class="inverse">
+                    <input type="radio" name="logo_bg" value="default" id="logo_bg_1" checked>
+                    <label for="logo_bg_1"></label>
+                  </span>
+                  <span>
+                    <input type="radio" name="logo_bg" value="color_2" id="logo_bg_2">
+                    <label for="logo_bg_2"></label>
+                  </span>
+                  <span>
+                    <input type="radio" name="logo_bg" value="color_3" id="logo_bg_3">
+                    <label for="logo_bg_3"></label>
+                  </span>
+                  <span>
+                    <input type="radio" name="logo_bg" value="color_4" id="logo_bg_4">
+                    <label for="logo_bg_4"></label>
+                  </span>
+                  <span>
+                    <input type="radio" name="logo_bg" value="color_5" id="logo_bg_5">
+                    <label for="logo_bg_5"></label>
+                  </span>
+                  <span>
+                    <input type="radio" name="logo_bg" value="color_6" id="logo_bg_6">
+                    <label for="logo_bg_6"></label>
+                  </span>
+                  <span>
+                    <input type="radio" name="logo_bg" value="color_7" id="logo_bg_7">
+                    <label for="logo_bg_7"></label>
+                  </span>
+                  <span>
+                    <input type="radio" name="logo_bg" value="color_8" id="logo_bg_8">
+                    <label for="logo_bg_8"></label>
+                  </span>
+				</li>
+				<li class="drop-title"><p>头部</p></li>
+				<li class="drop-skin-li clearfix">
+                  <span class="inverse">
+                    <input type="radio" name="header_bg" value="default" id="header_bg_1" checked>
+                    <label for="header_bg_1"></label>                      
+                  </span>                                                    
+                  <span>                                                     
+                    <input type="radio" name="header_bg" value="color_2" id="header_bg_2">
+                    <label for="header_bg_2"></label>                      
+                  </span>                                                    
+                  <span>                                                     
+                    <input type="radio" name="header_bg" value="color_3" id="header_bg_3">
+                    <label for="header_bg_3"></label>
+                  </span>
+                  <span>
+                    <input type="radio" name="header_bg" value="color_4" id="header_bg_4">
+                    <label for="header_bg_4"></label>                      
+                  </span>                                                    
+                  <span>                                                     
+                    <input type="radio" name="header_bg" value="color_5" id="header_bg_5">
+                    <label for="header_bg_5"></label>                      
+                  </span>                                                    
+                  <span>                                                     
+                    <input type="radio" name="header_bg" value="color_6" id="header_bg_6">
+                    <label for="header_bg_6"></label>                      
+                  </span>                                                    
+                  <span>                                                     
+                    <input type="radio" name="header_bg" value="color_7" id="header_bg_7">
+                    <label for="header_bg_7"></label>
+                  </span>
+                  <span>
+                    <input type="radio" name="header_bg" value="color_8" id="header_bg_8">
+                    <label for="header_bg_8"></label>
+                  </span>
+				</li>
+				<li class="drop-title"><p>侧边栏</p></li>
+				<li class="drop-skin-li clearfix">
+                  <span class="inverse">
+                    <input type="radio" name="sidebar_bg" value="default" id="sidebar_bg_1" checked>
+                    <label for="sidebar_bg_1"></label>
+                  </span>
+                  <span>
+                    <input type="radio" name="sidebar_bg" value="color_2" id="sidebar_bg_2">
+                    <label for="sidebar_bg_2"></label>
+                  </span>
+                  <span>
+                    <input type="radio" name="sidebar_bg" value="color_3" id="sidebar_bg_3">
+                    <label for="sidebar_bg_3"></label>
+                  </span>
+                  <span>
+                    <input type="radio" name="sidebar_bg" value="color_4" id="sidebar_bg_4">
+                    <label for="sidebar_bg_4"></label>
+                  </span>
+                  <span>
+                    <input type="radio" name="sidebar_bg" value="color_5" id="sidebar_bg_5">
+                    <label for="sidebar_bg_5"></label>
+                  </span>
+                  <span>
+                    <input type="radio" name="sidebar_bg" value="color_6" id="sidebar_bg_6">
+                    <label for="sidebar_bg_6"></label>
+                  </span>
+                  <span>
+                    <input type="radio" name="sidebar_bg" value="color_7" id="sidebar_bg_7">
+                    <label for="sidebar_bg_7"></label>
+                  </span>
+                  <span>
+                    <input type="radio" name="sidebar_bg" value="color_8" id="sidebar_bg_8">
+                    <label for="sidebar_bg_8"></label>
+                  </span>
+				</li>
+			  </ul>
+			</li>
+            <!--切换主题配色-->
+          </ul>
+          
+        </div>
+      </nav>
+      
+    </header>
+    <!--End 头部信息-->
+    
+    <!--页面主要内容-->
+        <main class="lyear-layout-content">
+
+      <div class="container-fluid">
+
+        <div class="row">
+
+          <div class="col-lg-6">
+            <div class="card">
+              <div class="card-header">
+                <h4>按班级</h4>
+                   <select id="class_select" class="pull-right search-bar">
+                        <option value="请选择">请选择</option>
+                        {% if class_lists %}
+                            {% for foo in class_lists %}
+                                <option value ="{{foo}}">{{ foo }}</option>
+                            {% endfor %}
+                        {% endif %}
+                    </select>
+              </div>
+                <div id="class_form"></div>
+              <div class="card-body">
+                <canvas id="chart-class" width="500" height="300"></canvas>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-6">
+            <div class="card">
+              <div class="card-header">
+                <h4>按年级</h4>
+                  <select id="grade_select" class="pull-right search-bar">
+                         <option value="请选择">请选择</option>
+                        {% if grade_lists %}
+                            {% for foo in grade_lists %}
+                                <option value ="{{foo}}">{{ foo }}</option>
+                            {% endfor %}
+                        {% endif %}
+                    </select>
+              </div>
+                <div id="grade_form"></div>
+              <div class="card-body">
+                <canvas id="chart-grade" width="280" height="300"></canvas>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-6">
+            <div class="card">
+              <div class="card-header"><h4>按课程</h4>
+                  <select id="course_select" class="pull-right search-bar">
+                         <option value="请选择">请选择</option>
+                        {% if course_lists %}
+                            {% for foo in course_lists %}
+                                <option value ="{{foo}}">{{ foo }}</option>
+                            {% endfor %}
+                        {% endif %}
+                    </select>
+              </div>
+                <div id="course_form"></div>
+              <div class="card-body">
+                <canvas id="chart-course" width="280" height="300"></canvas>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+
+
+      </div>
+
+
+    </main>
+    <!--End 页面主要内容-->
+  </div>
+</div>
+
+<script type="text/javascript" src="/static/js/jquery.min.js"></script>
+<script type="text/javascript" src="/static/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="/static/js/perfect-scrollbar.min.js"></script>
+<script type="text/javascript" src="/static/js/main.min.js"></script>
+
+<!--图表插件-->
+<script type="text/javascript" src="/static/js/echarts.min.js"></script>
+<script type="text/javascript">
+$(function(){
+    $('.search-bar .dropdown-menu a').click(function() {
+        var field = $(this).data('field') || '';
+        $('#search-field').val(field);
+        $('#search-btn').html($(this).text() + ' <span class="caret"></span>');
+    });
+});
+
+$("#class_select").change(function () {
+    var data = {
+        "class": $("#class_select option:selected").val(),
+    };
+    $.ajax({
+        type:"POST",
+        url: "/discipline_leader/statistics/class",
+        contentType: "application/json;charset=UTF-8",
+        data:JSON.stringify(data),
+        success(data){
+            if(data["msg"]!="该班级有数据！"){
+                alert(data["msg"]);
+            }else{
+                $("#class_form").empty();
+                var myChart = echarts.init(document.getElementById('chart-class'));
+              // 指定图表的配置项和数据
+              myChart.setOption({
+                   title: {
+                        text: data["header"]
+                   },
+                   tooltip: {},
+                   legend: {
+                        data: ['人数']
+                   },
+                   xAxis: {
+                        data: ["0-0.65", "0.65-0.9", "0.9-1.0"]
+                   },
+                   yAxis: {},
+                   series: [{
+                        name: '人数',
+                        type: 'bar',
+                        data: data["series"]
+                   }]
+              });
+              $("#class_form").append(data["form"]);
+            }
+        }
+   });
+});
+
+
+$("#grade_select").change(function () {
+    var data = {
+        "grade": $("#grade_select option:selected").val(),
+    };
+    $.ajax({
+        type:"POST",
+        url: "/discipline_leader/statistics/grade",
+        contentType: "application/json;charset=UTF-8",
+        data:JSON.stringify(data),
+        success(data){
+            if(data["msg"]!="该年级有数据！"){
+                alert(data["msg"]);
+            }else{
+                $("#grade_form").empty();
+                var myChart = echarts.init(document.getElementById('chart-grade'));
+
+        // 指定图表的配置项和数据
+        var option = {
+                series : [
+                    {
+                        name: '成绩分布',
+                        type: 'pie',
+                        radius: '65%',
+                        roseType: 'angle',
+                        data:[
+                            {value:data["data"][0], name:'不及格'},
+                            {value:data["data"][1], name:'及格'},
+                        ]
+                    }
+                ]
+            };
+
+        // 使用刚指定的配置项和数据显示图表。
+        myChart.setOption(option);
+        $("#grade_form").append(data["form"]);
+            }
+        }
+   });
+});
+
+$("#course_select").change(function () {
+    var data = {
+        "course": $("#course_select option:selected").val(),
+    };
+    $.ajax({
+        type:"POST",
+        url: "/discipline_leader/statistics/course",
+        contentType: "application/json;charset=UTF-8",
+        data:JSON.stringify(data),
+        success(data){
+            if(data["msg"]!="该课程有数据！"){
+                alert(data["msg"]);
+            }else{
+                $("#course_form").empty();
+                var myChart = echarts.init(document.getElementById('chart-course'));
+              // 指定图表的配置项和数据
+              myChart.setOption({
+                   title: {
+                        text: data["course"]
+                   },
+                   tooltip: {},
+                   legend: {
+                        data: ['人数']
+                   },
+                   xAxis: {
+                        data: data["header"]
+                   },
+                   yAxis: {},
+                   series: [{
+                        name: '人数',
+                        type: 'bar',
+                        data: data["amount"]
+                   }]
+              });
+              $("#course_form").append(data["form"]);
+            }
+        }
+   });
+});
+</script>
+</body>
+</html>

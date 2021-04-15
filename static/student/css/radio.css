@@ -1,0 +1,62 @@
+label {
+    font-size: 18px;
+}
+
+
+/* 把单选框隐藏 */
+
+label input[type="radio"] {
+    display: none;
+}
+
+
+/* 自定义单选框初始样式 */
+
+label .radio {
+    display: inline-block;
+    position: relative;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    border: 2px solid #777;
+    vertical-align: -4px;
+}
+
+
+/* 自定义单选框选中样式 初始隐藏*/
+
+label .radio::after {
+    content: "";
+    width: 10px;
+    height: 10px;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+    background-color: #299;
+    border-radius: 50%;
+    display: none;
+}
+
+
+/* 显示自定义单选框 */
+
+label input[type="radio"]:checked+.radio::after {
+    display: block;
+}
+
+
+/* 切换自定义单选框border颜色 */
+
+label input[type="radio"]:checked+.radio {
+    border-color: #299;
+}
+
+
+/* 选中时，文本加颜色 */
+
+label input[type="radio"]:checked~.item {
+    color: #199;
+}

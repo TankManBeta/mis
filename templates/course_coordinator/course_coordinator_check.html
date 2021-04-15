@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+<title>课程负责人审核界面</title>
+<link rel="icon" href="/static/favicon.ico" type="image/ico">
+<meta name="keywords" content="LightYear,光年,后台模板,后台管理系统,光年HTML模板">
+<meta name="description" content="LightYear是一个基于Bootstrap v3.3.7的后台管理系统的HTML模板。">
+<meta name="author" content="yinqi">
+<link href="/static/css/bootstrap.min.css" rel="stylesheet">
+<link href="/static/css/materialdesignicons.min.css" rel="stylesheet">
+<link href="/static/css/style.min.css" rel="stylesheet">
+<script type="text/javascript" src="/static/js/jquery-3.2.1.min.js"></script>
+<script type="text/javascript" src="/static/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="/static/js/perfect-scrollbar.min.js"></script>
+<script type="text/javascript" src="/static/js/main.min.js"></script>
+<script type="text/javascript" src="/static/js/echarts.min.js"></script>
+</head>
+  
+<body>
+<div class="lyear-layout-web">
+  <div class="lyear-layout-container">
+    <!--左侧导航-->
+    <aside class="lyear-layout-sidebar">
+       
+      <!-- logo -->
+      <div id="logo" class="sidebar-header">
+        <a href="/course_coordinator/check"><img src="/static/images/nwu_login.png" width="220px" height="80px" /></a>
+      </div>
+      <div class="lyear-layout-sidebar-scroll">
+        
+        <nav class="sidebar-main">
+          <ul class="nav nav-drawer">
+              <li class="nav-item nav-item-has-subnav">
+             <a href="javascript:void(0)"><i class="mdi mdi-palette"></i> 审核 </a>
+              <ul class="nav nav-subnav">
+                <li> <a href="/course_coordinator/check">审核</a> </li>
+              </ul>
+               </li>
+          </ul>
+        </nav>
+      </div>
+      
+    </aside>
+    <!--End 左侧导航-->
+
+<!-- 模态框（Modal） -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true" id="close">
+					&times;
+				</button>
+				<h4 class="modal-title" id="myModalLabel">
+
+				</h4>
+			</div>
+			<div class="modal-body">
+                <div class="table-responsive">
+                    <div id="show_info">
+                        <div class="card-body">
+                         <div class="table-responsive">
+                            <table class="table table-bordered" id="table1">
+
+                            </table>
+                         </div>
+                        </div>
+                            <div id="chart1" style="width: 600px;height:400px;"></div>
+                        <div class="card-body">
+                         <div class="table-responsive">
+                            <table class="table table-bordered" id="table2">
+
+                            </table>
+                         </div>
+                        </div>
+                            <div id="chart2" style="width: 600px;height:400px;"></div>
+                        <div class="card-body">
+                         <div class="table-responsive">
+                            <table class="table table-bordered" id="table3">
+                            </table>
+                         </div>
+                        </div>
+                            <div id="chart3" style="width: 600px;height:400px;"></div>
+                        <div class="card-body">
+                         <div class="table-responsive">
+                            <table class="table table-bordered" id="table4">
+                            </table>
+                         </div>
+                        </div>
+                            <div id="chart4" style="width: 600px;height:400px;"></div>
+                        <div class="card-body">
+                         <div class="table-responsive">
+                            <table class="table table-bordered" id="table5">
+                            </table>
+                         </div>
+                        </div>
+                            <div id="chart5" style="width: 600px;height:400px;"></div>
+                        <div class="card-body">
+                         <div class="table-responsive">
+                            <table class="table table-bordered" id="table6">
+                            </table>
+                         </div>
+                        </div>
+                            <div id="chart6" style="width: 600px;height:400px;"></div>
+                    </div>
+                </div>
+			</div>
+		</div><!-- /.modal-content -->
+	</div><!-- /.modal -->
+</div>
+
+<!-- 模态框2 -->
+<button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#reasonModal" id="reason_modal" style="display: none">
+</button>
+<!-- 模态框（Modal） -->
+<div class="modal fade" id="reasonModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true" id="reason_close">
+					&times;
+				</button>
+				<h4 class="modal-title" id="myModalLabel">
+                    不通过原因
+				</h4>
+			</div>
+			<div class="modal-body">
+                <textarea id="reason_content" style="width:550px; height:200px"></textarea>
+			</div>
+            <div class="modal-footer">
+                <button class="btn btn-success" id="reason_submit">提交</button>
+			</div>
+		</div><!-- /.modal-content -->
+	</div><!-- /.modal -->
+</div>
+
+
+    <!--头部信息-->
+    <header class="lyear-layout-header">
+      
+      <nav class="navbar navbar-default">
+        <div class="topbar">
+          
+          <div class="topbar-left">
+            <div class="lyear-aside-toggler">
+              <span class="lyear-toggler-bar"></span>
+              <span class="lyear-toggler-bar"></span>
+              <span class="lyear-toggler-bar"></span>
+            </div>
+            <span class="navbar-page-title"> 课程负责人审核页 </span>
+            <button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal" id="my_modal" style="display: none"></button>
+          </div>
+          
+          <ul class="topbar-right">
+            <li class="dropdown dropdown-profile">
+              <a href="javascript:void(0)" data-toggle="dropdown">
+                <img class="img-avatar img-avatar-48 m-r-10" src="/static/images/users/avatar.jpg" alt="头像" />
+                <span>{{current_user.user_id}}<span class="caret"></span></span>
+              </a>
+              <ul class="dropdown-menu dropdown-menu-right">
+                <li> <a href="/logout"><i class="mdi mdi-logout-variant"></i> 退出登录</a> </li>
+              </ul>
+            </li>
+            <!--切换主题配色-->
+		    <li class="dropdown dropdown-skin">
+			  <span data-toggle="dropdown" class="icon-palette"><i class="mdi mdi-palette"></i></span>
+			  <ul class="dropdown-menu dropdown-menu-right" data-stopPropagation="true">
+                <li class="drop-title"><p>主题</p></li>
+                <li class="drop-skin-li clearfix">
+                  <span class="inverse">
+                    <input type="radio" name="site_theme" value="default" id="site_theme_1" checked>
+                    <label for="site_theme_1"></label>
+                  </span>
+                  <span>
+                    <input type="radio" name="site_theme" value="dark" id="site_theme_2">
+                    <label for="site_theme_2"></label>
+                  </span>
+                  <span>
+                    <input type="radio" name="site_theme" value="translucent" id="site_theme_3">
+                    <label for="site_theme_3"></label>
+                  </span>
+                </li>
+			    <li class="drop-title"><p>LOGO</p></li>
+				<li class="drop-skin-li clearfix">
+                  <span class="inverse">
+                    <input type="radio" name="logo_bg" value="default" id="logo_bg_1" checked>
+                    <label for="logo_bg_1"></label>
+                  </span>
+                  <span>
+                    <input type="radio" name="logo_bg" value="color_2" id="logo_bg_2">
+                    <label for="logo_bg_2"></label>
+                  </span>
+                  <span>
+                    <input type="radio" name="logo_bg" value="color_3" id="logo_bg_3">
+                    <label for="logo_bg_3"></label>
+                  </span>
+                  <span>
+                    <input type="radio" name="logo_bg" value="color_4" id="logo_bg_4">
+                    <label for="logo_bg_4"></label>
+                  </span>
+                  <span>
+                    <input type="radio" name="logo_bg" value="color_5" id="logo_bg_5">
+                    <label for="logo_bg_5"></label>
+                  </span>
+                  <span>
+                    <input type="radio" name="logo_bg" value="color_6" id="logo_bg_6">
+                    <label for="logo_bg_6"></label>
+                  </span>
+                  <span>
+                    <input type="radio" name="logo_bg" value="color_7" id="logo_bg_7">
+                    <label for="logo_bg_7"></label>
+                  </span>
+                  <span>
+                    <input type="radio" name="logo_bg" value="color_8" id="logo_bg_8">
+                    <label for="logo_bg_8"></label>
+                  </span>
+				</li>
+				<li class="drop-title"><p>头部</p></li>
+				<li class="drop-skin-li clearfix">
+                  <span class="inverse">
+                    <input type="radio" name="header_bg" value="default" id="header_bg_1" checked>
+                    <label for="header_bg_1"></label>                      
+                  </span>                                                    
+                  <span>                                                     
+                    <input type="radio" name="header_bg" value="color_2" id="header_bg_2">
+                    <label for="header_bg_2"></label>                      
+                  </span>                                                    
+                  <span>                                                     
+                    <input type="radio" name="header_bg" value="color_3" id="header_bg_3">
+                    <label for="header_bg_3"></label>
+                  </span>
+                  <span>
+                    <input type="radio" name="header_bg" value="color_4" id="header_bg_4">
+                    <label for="header_bg_4"></label>                      
+                  </span>                                                    
+                  <span>                                                     
+                    <input type="radio" name="header_bg" value="color_5" id="header_bg_5">
+                    <label for="header_bg_5"></label>                      
+                  </span>                                                    
+                  <span>                                                     
+                    <input type="radio" name="header_bg" value="color_6" id="header_bg_6">
+                    <label for="header_bg_6"></label>                      
+                  </span>                                                    
+                  <span>                                                     
+                    <input type="radio" name="header_bg" value="color_7" id="header_bg_7">
+                    <label for="header_bg_7"></label>
+                  </span>
+                  <span>
+                    <input type="radio" name="header_bg" value="color_8" id="header_bg_8">
+                    <label for="header_bg_8"></label>
+                  </span>
+				</li>
+				<li class="drop-title"><p>侧边栏</p></li>
+				<li class="drop-skin-li clearfix">
+                  <span class="inverse">
+                    <input type="radio" name="sidebar_bg" value="default" id="sidebar_bg_1" checked>
+                    <label for="sidebar_bg_1"></label>
+                  </span>
+                  <span>
+                    <input type="radio" name="sidebar_bg" value="color_2" id="sidebar_bg_2">
+                    <label for="sidebar_bg_2"></label>
+                  </span>
+                  <span>
+                    <input type="radio" name="sidebar_bg" value="color_3" id="sidebar_bg_3">
+                    <label for="sidebar_bg_3"></label>
+                  </span>
+                  <span>
+                    <input type="radio" name="sidebar_bg" value="color_4" id="sidebar_bg_4">
+                    <label for="sidebar_bg_4"></label>
+                  </span>
+                  <span>
+                    <input type="radio" name="sidebar_bg" value="color_5" id="sidebar_bg_5">
+                    <label for="sidebar_bg_5"></label>
+                  </span>
+                  <span>
+                    <input type="radio" name="sidebar_bg" value="color_6" id="sidebar_bg_6">
+                    <label for="sidebar_bg_6"></label>
+                  </span>
+                  <span>
+                    <input type="radio" name="sidebar_bg" value="color_7" id="sidebar_bg_7">
+                    <label for="sidebar_bg_7"></label>
+                  </span>
+                  <span>
+                    <input type="radio" name="sidebar_bg" value="color_8" id="sidebar_bg_8">
+                    <label for="sidebar_bg_8"></label>
+                  </span>
+				</li>
+			  </ul>
+			</li>
+            <!--切换主题配色-->
+          </ul>
+          
+        </div>
+      </nav>
+      
+    </header>
+    <!--End 头部信息-->
+    
+    <!--页面主要内容-->
+    <main class="lyear-layout-content">
+      
+      <div class="container-fluid">
+        
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="card">
+              <div class="card-toolbar clearfix">
+                <div class="toolbar-btn-action">
+                  <button class="btn btn-primary m-r-5" id="check_button"><i class="mdi mdi-plus"></i> 查看</button>
+                  <button class="btn btn-success m-r-5" id="pass_button" ><i class="mdi mdi-check"></i> 审核通过</button>
+                  <button class="btn btn-danger" id="fail_button"><i class="mdi mdi-window-close"></i> 审核不通过</button>
+                </div>
+              </div>
+              <div class="card-body">
+                <div class="table-responsive">
+                  <table class="table table-bordered">
+                    <thead>
+                      <tr>
+                        <th>
+                          <label class="lyear-checkbox checkbox-primary">
+                            <input type="checkbox" id="check-all"><span></span>
+                          </label>
+                        </th>
+                        <th>班级</th>
+                        <th>课程编号</th>
+                        <th>课程名</th>
+                        <th>教师</th>
+                        <th>状态</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                    {% if send_data %}
+                    {% for send_datum in send_data %}
+                        <tr>
+                            <td>
+                              <label class="lyear-checkbox checkbox-primary">
+                                <input type="checkbox" name="ck" value={{ send_datum[5] }}><span ></span>
+                              </label>
+                            </td>
+                            <td>{{ send_datum[0] }}</td>
+                            <td>{{ send_datum[1] }}</td>
+                            <td>{{ send_datum[2] }}</td>
+                            <td>{{ send_datum[3] }}</td>
+                            <td>{{ send_datum[4] }}</td>
+                      </tr>
+                    {% endfor %}
+                    {% endif %} 
+
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+        </div>
+        
+      </div>
+
+
+    </main>
+    <!--End 页面主要内容-->
+  </div>
+</div>
+
+<script type="text/javascript">
+$(function(){
+    $('.search-bar .dropdown-menu a').click(function() {
+        var field = $(this).data('field') || '';
+        $('#search-field').val(field);
+        $('#search-btn').html($(this).text() + ' <span class="caret"></span>');
+    });
+});
+
+$("#check_button").click(function () {
+    var data = {
+        "teacher_id": $('input[name=ck]:checked').val(),
+        "class_name": $("input[name=ck]:checked").parent().parent().next().first().text(),
+        "course_id": $("input[name=ck]:checked").parent().parent().next().next().first().text(),
+    };
+    $.ajax({
+            type:"POST",
+            url:"/course_coordinator/detail",
+            contentType: "application/json;charset=UTF-8",
+            data:JSON.stringify(data),
+            success(data){
+              if (data != "您还未选择需要查看的条目！" && data != "该课程暂无数据！"){
+                  $("#my_modal").click();
+                  console.log(data);
+                  for(var i=0; i<data["cal_data"].length; i++){
+                      $("#table"+(i+1)).append(data["cal_data"][i][1]);
+                   var myChart = echarts.init(document.getElementById('chart'+(i+1)));
+              // 指定图表的配置项和数据
+              myChart.setOption({
+                   title: {
+                        text: data["cal_data"][i][0]
+                   },
+                   tooltip: {},
+                   legend: {
+                        data: ['人数']
+                   },
+                   xAxis: {
+                        data: ["0-0.65", "0.65-0.9", "0.9-1.0"]
+                   },
+                   yAxis: {},
+                   series: [{
+                        name: '人数',
+                        type: 'bar',
+                        data: data["cal_data"][i][2]
+                   }]
+              });
+              }
+               }else {
+                  alert(data);
+                  window.location.reload();
+              }
+            }
+        })
+});
+
+$("#close").click(function () {
+    window.location.reload();
+});
+
+$("#reason_close").click(function () {
+    window.location.reload();
+});
+
+$("#pass_button").click(function () {
+    var data = {
+        "teacher_id": $('input[name=ck]:checked').val(),
+        "class_name": $("input[name=ck]:checked").parent().parent().next().first().text(),
+        "course_id": $("input[name=ck]:checked").parent().parent().next().next().first().text(),
+    };
+    $.ajax({
+            type:"POST",
+            url:"/course_coordinator/pass",
+            contentType: "application/json;charset=UTF-8",
+            data:JSON.stringify(data),
+            success(data){
+               alert(data);
+                window.location.reload()
+            }
+        })
+});
+
+$("#fail_button").click(function () {
+    var data = {
+        "teacher_id": $('input[name=ck]:checked').val(),
+        "class_name": $("input[name=ck]:checked").parent().parent().next().first().text(),
+        "course_id": $("input[name=ck]:checked").parent().parent().next().next().first().text(),
+    };
+    $.ajax({
+            type:"POST",
+            url:"/course_coordinator/refuse",
+            contentType: "application/json;charset=UTF-8",
+            data:JSON.stringify(data),
+            success(data){
+                if (data == "您还未选择课程！" || data == "该教师还未上传成绩！不能审核！"){
+                    alert(data);
+                    window.location.reload()
+                }
+                else{
+                    $("#reason_modal").click();
+                }
+            }
+        })
+});
+
+$("#reason_submit").click(function () {
+     var data = {
+        "teacher_id": $('input[name=ck]:checked').val(),
+        "class_name": $("input[name=ck]:checked").parent().parent().next().first().text(),
+        "course_id": $("input[name=ck]:checked").parent().parent().next().next().first().text(),
+         "content": $("#reason_content").val()
+    };
+    $.ajax({
+            type:"POST",
+            url:"/course_coordinator/reason",
+            contentType: "application/json;charset=UTF-8",
+            data:JSON.stringify(data),
+            success(data){
+                alert(data);
+                $("#reason_close").click();
+            }
+        })
+})
+</script>
+</body>
+
+</html>
